@@ -1,3 +1,5 @@
+Explain this JSON to me please
+
 const express = require('express');
 const app = express();
 app.use(express.json());
@@ -19,6 +21,17 @@ app.post('/log', (req, res) => {
 // Add the GET /log endpoint to return stored logs as JSON
 app.get('/log', (req, res) => {
   res.json({ logs });
+});
+
+// Add clear logs endpoint
+app.post('/clear', (req, res) => {
+  const count = logs.length;
+  logs = [];  // Clear all logs
+  res.json({ 
+    status: 'logs cleared', 
+    cleared_count: count,
+    timestamp: new Date().toISOString()
+  });
 });
 
 app.get('/', (req, res) => {
